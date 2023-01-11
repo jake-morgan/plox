@@ -12,5 +12,5 @@ lint:
 	@echo ""
 
 	$(info Security scanning with Bandit)
-	python -m bandit ./plox/
+	python -m bandit -r ./plox/
 	@echo ""

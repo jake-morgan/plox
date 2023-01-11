@@ -4,9 +4,8 @@ Main Lox entrypoint.
 
 import sys
 
+import config
 import scanner as s
-
-HAD_ERROR = False
 
 
 def run(source):
@@ -23,9 +22,10 @@ def run_file(path):
     """Executes a Lox file."""
 
     with open(path, "r", encoding="UTF-8") as file_in:
-        bytes_in = file_in.readlines()
+        bytes_in = file_in.read()
     run(bytes_in)
-    if HAD_ERROR is True:
+
+    if config.HAD_ERROR is True:
         sys.exit(65)
 
 
@@ -38,8 +38,7 @@ def run_prompt():
         if line == "exit":
             break
         run(line)
-        global HAD_ERROR
-        HAD_ERROR = False
+        config.HAD_ERROR = False
 
 
 def error(line, message):
@@ -52,8 +51,7 @@ def report(line, where, message):
     """Reports an error."""
 
     print(f"[line {line}] Error{where}: {message}")
-    global HAD_ERROR
-    HAD_ERROR = True
+    config.HAD_ERROR = True
 
 
 if __name__ == "__main__":

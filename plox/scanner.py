@@ -1,6 +1,8 @@
 from token.token import Token
 from token.token import TokenType as tt
 
+import plox
+
 
 class Scanner:
     tokens = []
@@ -47,10 +49,42 @@ class Scanner:
             self.__add_token(tt.SEMICOLON)
         elif c == "*":
             self.__add_token(tt.STAR)
+        elif c == "!":
+            if self.__match("=") is True:
+                self.__add_token(tt.BANG_EQUAL)
+            else:
+                self.__add_token(tt.BANG)
+        elif c == "=":
+            if self.__match("=") is True:
+                self.__add_token(tt.EQUAL_EQUAL)
+            else:
+                self.__add_token(tt.EQUAL)
+        elif c == "<":
+            if self.__match("=") is True:
+                self.__add_token(tt.LESS_EQUAL)
+            else:
+                self.__add_token(tt.LESS)
+        elif c == ">":
+            if self.__match("=") is True:
+                self.__add_token(tt.GREATER_EQUAL)
+            else:
+                self.__add_token(tt.GREATER)
+        else:
+            plox.error(self.line, "Unexpected character.")
 
     def __advance(self):
         self.current += 1
-        return self.source[self.current - 1] # We need to return the character before we incremented
+        return self.source[
+            self.current - 1
+        ]  # We need to return the character from before we incremented
+
+    def __match(self, expected):
+        if self.__is_at_end() is True:
+            return False
+        if self.source[self.current] != expected:
+            return False
+        self.current += 1
+        return True
 
     def __add_token(self, token_type, literal=None):
         text = self.source[self.start : self.current]
