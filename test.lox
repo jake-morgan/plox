@@ -1,3 +1,7 @@
 * - + ()
 {} **
+<> // this is a comment
+/ / / "this is a string"
 > >= == = !=
+12 3.14159 -1
+or and if while ordinary

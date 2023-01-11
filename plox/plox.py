@@ -1,6 +1,4 @@
-"""
-Main Lox entrypoint.
-"""
+# pylint: disable=import-error, no-name-in-module, no-member
 
 import sys
 
@@ -21,7 +19,7 @@ def run(source):
 def run_file(path):
     """Executes a Lox file."""
 
-    with open(path, "r", encoding="UTF-8") as file_in:
+    with open(path, "r", encoding="utf-8") as file_in:
         bytes_in = file_in.read()
     run(bytes_in)
 
