@@ -1,0 +1,7 @@
+[MESSAGES CONTROL]
+
+disable=
+    missing-docstring,
+    missing-class-docstring,
+    missing-module-docstring,
+    global-statement,
